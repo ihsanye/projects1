@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 function List({ contacts }) {
 
     const [filterText, setFilterText] = useState('');
@@ -12,11 +11,17 @@ function List({ contacts }) {
     return (
         <div>
             <input placeholder='Filter Contact' value={filterText} onChange={(e) => setFilterText(e.target.value)}></input>
-            <ul>{
+            <ul className='list'>{
                 filtered.map((contact, i) =>
-                    <li key={i}>{contact.fullname}</li>)
+                    <li key={i}>
+                        <span>{contact.fullname}</span>
+                        <span>{contact.phone_number}</span>
+                    </li>)
             }
             </ul>
+            <p>
+                Total {filtered.length}
+            </p>
         </div>
     )
 }
