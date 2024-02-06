@@ -1,7 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const initialFormValues = { fullname: '', phone_number: '' };
 
 function Form({ addContact, contacts }) {
-    const [form, setForm] = useState({ fullname: '', phone_number: '' });
+    const [form, setForm] = useState(initialFormValues);
+
+    useEffect(() => {
+        setForm(initialFormValues);
+    }, [contacts]);
+
     const onChangeInput = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
@@ -11,7 +18,7 @@ function Form({ addContact, contacts }) {
             return false;
         }
         addContact([...contacts, form]); //yeni arraylerin eklenmesini saglar, surekli sifirlamaz
-        setForm({ fullname: '', phone_number: '' }); //input form icini temizler
+
     }
 
     return (
